@@ -6,14 +6,13 @@ Release:	1
 License:	GPL
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.sim.no/pub/dime/%name-%version-src.tar.bz2
 Source1:	ftp://ftp.sim.no/pub/dime/%name-%version-doc.tar.bz2
 Patch0:		
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define	_prefix	/usr
 
 %description
 Dime is a C++ class library for reading, constructing, manipulating,
@@ -58,23 +57,26 @@ Bibliotek obs³uguje g³ównie nastêpuj±ce funkcje:
 
 %package devel
 Summary:	DIME devel
-Summary(pl):	DIME devel
+Summary(pl):	DIME - czê¶æ dla programistów
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 
 %description devel
+
 %description -l pl devel
 
 %package documentation
-Summary:	DEME doc
-Summary(pl):	DIME doc
+Summary:	DIME doc
+Summary(pl):	DIME - dokumentacja
 Group:		Documentation
 Group(de):	Dokumentation
+Group(es):	Documentación
 Group(pl):	Dokumentacja
 
 %description documentation
+
 %description -l pl documentation
 
 %prep
@@ -83,7 +85,7 @@ Group(pl):	Dokumentacja
 
 %build
 cd build
-%{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+%{__make} RPM_OPT_FLAGS="%{rpmcflags}"
 cd ../docs/latex
 %{__make} refman.ps
 
@@ -94,7 +96,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}}
 install -d $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/{latex,html}
 
 cp -rp include/* $RPM_BUILD_ROOT%{_includedir}
-install -s build/libdime.a $RPM_BUILD_ROOT%{_libdir}
+install build/libdime.a $RPM_BUILD_ROOT%{_libdir}
 cp -rp docs/latex/*.tex $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/latex
 cp -rp docs/latex/*.sty $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/latex
 
