@@ -68,9 +68,8 @@ Group(pl):	Programowanie/Biblioteki
 %package documentation
 Summary:	DEME doc
 Summary(pl):	DIME doc
-Group:		Documentation/Libraries
-######		Unknown group!
-Group(pl):	Dokumentacja/Biblioteki
+Group:		Documentation
+Group(pl):	Dokumentacja
 
 %description documentation
 %description -l pl documentation
