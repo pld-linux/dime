@@ -55,16 +55,16 @@ Bibliotek obs³uguje g³ównie nastêpuj±ce funkcje:
   pamiêci±, dziêki którym mo¿na znacznie zwiêkszyæ wydajno¶æ.
 
 %package devel
-Summary:	DIME devel
+Summary:	DIME - development files
 Summary(pl):	DIME - czê¶æ dla programistów
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
 
 %description devel
-Dime developement files.
+Dime development files.
 
 %description devel -l pl
-Pliki developerskie do dime.
+Pliki dime przeznaczone dla programistów.
 
 %package documentation
 Summary:	DIME doc
@@ -82,10 +82,11 @@ Dokumentacja dime.
 %setup -q -D -b1
 
 %build
-cd build
-%{__make} RPM_OPT_FLAGS="%{rpmcflags}"
-cd ../docs/latex
-%{__make} refman.ps
+%{__make} -C build \
+	CC="%{__cxx}" \
+	OPT="%{rpmcflags}"
+
+%{__make} -C docs/latex refman.ps
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -105,15 +106,16 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README TODO ChangeLog
-%attr(644,root,root) %{_libdir}/libdime.a
+%{_libdir}/libdime.a
 
 %files devel
 %defattr(644,root,root,755)
-%doc docs/latex/refman.ps ChangeLog.gz README.gz TODO.gz
-%{_includedir}/dime/
+%doc docs/latex/refman.ps ChangeLog README TODO
+%{_includedir}/dime
 
 %files documentation
 %defattr(644,root,root,755)
 #%doc docs/html/* docs/latex/*.tex docs/latex/*.sty
-%attr(644,root,root) /%{datadir}/doc/%{name}-documentation-%{version}/latex
-%attr(644,root,root) /%{datadir}/doc/%{name}-documentation-%{version}/html
+%dir %{_docdir}/%{name}-documentation-%{version}
+%{_docdir}/%{name}-documentation-%{version}/latex
+%{_docdir}/%{name}-documentation-%{version}/html
