@@ -5,9 +5,11 @@ Version:	0.9.1
 Release:	3
 License:	GPL
 Group:		Libraries
-Source0:	ftp://ftp.sim.no/pub/dime/%{name}-%{version}-src.tar.bz2
+# Old site:	ftp://ftp.sim.no/pub/dime/
+# New site(?):	http://download.berlios.de/cad2octree/
+Source0:	%{name}-%{version}-src.tar.bz2
 # Source0-md5:	142af240cd35508d606917a38164c759
-Source1:	ftp://ftp.sim.no/pub/dime/%{name}-%{version}-doc.tar.bz2
+Source1:	%{name}-%{version}-doc.tar.bz2
 # Source1-md5:	994706320ce7d222a1597913ba0cbee0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
