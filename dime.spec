@@ -5,13 +5,6 @@ Version:	0.9.1
 Release:	3
 License:	GPL
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	ftp://ftp.sim.no/pub/dime/%name-%version-src.tar.bz2
 Source1:	ftp://ftp.sim.no/pub/dime/%name-%version-doc.tar.bz2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -61,13 +54,6 @@ Bibliotek obsЁuguje gЁСwnie nastЙpuj╠ce funkcje:
 Summary:	DIME devel
 Summary(pl):	DIME - czЙ╤Ф dla programistСw
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -80,9 +66,6 @@ Pliki developerskie do dime.
 Summary:	DIME doc
 Summary(pl):	DIME - dokumentacja
 Group:		Documentation
-Group(de):	Dokumentation
-Group(es):	DocumentaciСn
-Group(pl):	Dokumentacja
 
 %description documentation
 Dime documentation.
