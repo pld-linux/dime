@@ -2,7 +2,7 @@ Summary:	DIME - DXF Import, manipulation and Export library.
 Summary(pl):	DIME - biblioteka do manipulacji plikami w formacie DXF.
 Name:		dime
 Version:	0.9.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Libraries
 Group(de):	Libraries
@@ -61,6 +61,7 @@ Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Requires:	%{name} = %{version}
 
 %description devel
 
