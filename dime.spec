@@ -71,8 +71,10 @@ Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
 Requires:	%{name} = %{version}
 
 %description devel
+Dime developement files.
 
-%description -l pl devel
+%description devel -l pl
+Pliki developerskie do dime.
 
 %package documentation
 Summary:	DIME doc
@@ -83,8 +85,10 @@ Group(es):	DocumentaciÛn
 Group(pl):	Dokumentacja
 
 %description documentation
+Dime documentation.
 
-%description -l pl documentation
+%description documentation -l pl
+Dokumentacja dime.
 
 %prep
 %setup -q
@@ -107,7 +111,7 @@ install build/libdime.a $RPM_BUILD_ROOT%{_libdir}
 cp -rp docs/latex/*.tex $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/latex
 cp -rp docs/latex/*.sty $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/latex
 
-cp -rp docs/latex/*  $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/html
+cp -rp docs/latex/* $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/html
 
 gzip -9nf README TODO ChangeLog
 
