@@ -11,6 +11,13 @@ Source0:	%{name}-%{version}-src.tar.bz2
 # Source0-md5:	142af240cd35508d606917a38164c759
 Source1:	%{name}-%{version}-doc.tar.bz2
 # Source1-md5:	994706320ce7d222a1597913ba0cbee0
+BuildRequires:	gcc-c++
+BuildRequires:	tetex-dvips
+BuildRequires:	tetex-fonts-ams
+BuildRequires:	tetex-format-latex
+BuildRequires:	tetex-makeindex
+BuildRequires:	tetex-metafont
+BuildRequires:	tetex-tex-misc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
