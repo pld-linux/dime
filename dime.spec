@@ -11,7 +11,6 @@ Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.sim.no/pub/dime/%name-%version-src.tar.bz2
 Source1:	ftp://ftp.sim.no/pub/dime/%name-%version-doc.tar.bz2
-Patch0:		
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
