@@ -33,6 +33,22 @@ For this kind of usage, special memory management techniques has been
 implemented, that can be used to boost the performance significantly.
 
 %description -l pl
+Dime jest bibliotek± klas C++ s³u¿±c± odczytywaniu, tworzeniu, modyfikacji 
+i zachowywaniu danych w plikach DXF. Nazwa jest skrótem od pierwszych liter:
+s³ów DXF Import, Manipulation, and Export library. Format pliku DXF pochodzi
+z AutoCAD-a, obecnie jest jednak bardzo popularny.
+
+Bibliotek obs³uguje g³ównie nastêpuj±ce funkcje:
+- ³adowanie plików DXF do hierarchii obiektu dime zawieraj±cej dane DXF
+- budowanie hierarchii obiektów dime od zera
+- ekstrakcja danych geometrycznych z hierarchii obiektów dime
+- manipulacja hierarchi± obiektów dime
+- przegl±d hierarchii obiektów dime podczas wykonywania ró¿nych zadañ
+- zachowywanie obiektów hierarchii dime w postaci plików zgodnych z formatem
+DXF
+Oryginalnym celem dime by³o importowanie i eksportowanie plików DXF.
+Dlatego zaimplementowano specjalne techniki zarz±dzania pamiêci±, dziêki
+którym mo¿na znacznie zwiêkszyæ wydajno¶æ.
 
 %package devel
 Summary:	DIME devel
