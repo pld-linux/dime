@@ -96,14 +96,12 @@ cp -rp docs/latex/*.sty $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%vers
 
 cp -rp docs/latex/* $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/html
 
-gzip -9nf README TODO ChangeLog
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc
+%doc README TODO ChangeLog
 %attr(644,root,root) %{_libdir}/libdime.a
 
 %files devel
