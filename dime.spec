@@ -89,16 +89,15 @@ cd ../docs/latex
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}}
-
-install -d $RPM_BUILD_ROOT/%{datadir}/doc/%{name}-documentation-%{version}/{latex,html}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}} \
+	$RPM_BUILD_ROOT%{datadir}/doc/%{name}-documentation-%{version}/{latex,html}
 
 cp -rp include/* $RPM_BUILD_ROOT%{_includedir}
 install build/libdime.a $RPM_BUILD_ROOT%{_libdir}
-cp -rp docs/latex/*.tex $RPM_BUILD_ROOT/%{datadir}/doc/%{name}-documentation-%{version}/latex
-cp -rp docs/latex/*.sty $RPM_BUILD_ROOT/%{datadir}/doc/%{name}-documentation-%{version}/latex
+cp -rp docs/latex/*.tex $RPM_BUILD_ROOT%{datadir}/doc/%{name}-documentation-%{version}/latex
+cp -rp docs/latex/*.sty $RPM_BUILD_ROOT%{datadir}/doc/%{name}-documentation-%{version}/latex
 
-cp -rp docs/latex/* $RPM_BUILD_ROOT/%{datadir}/doc/%{name}-documentation-%{version}/html
+cp -rp docs/latex/* $RPM_BUILD_ROOT%{datadir}/doc/%{name}-documentation-%{version}/html
 
 %clean
 rm -rf $RPM_BUILD_ROOT
