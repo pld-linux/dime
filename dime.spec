@@ -91,14 +91,14 @@ cd ../docs/latex
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}}
 
-install -d $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/{latex,html}
+install -d $RPM_BUILD_ROOT/%{datadir}/doc/%{name}-documentation-%{version}/{latex,html}
 
 cp -rp include/* $RPM_BUILD_ROOT%{_includedir}
 install build/libdime.a $RPM_BUILD_ROOT%{_libdir}
-cp -rp docs/latex/*.tex $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/latex
-cp -rp docs/latex/*.sty $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/latex
+cp -rp docs/latex/*.tex $RPM_BUILD_ROOT/%{datadir}/doc/%{name}-documentation-%{version}/latex
+cp -rp docs/latex/*.sty $RPM_BUILD_ROOT/%{datadir}/doc/%{name}-documentation-%{version}/latex
 
-cp -rp docs/latex/* $RPM_BUILD_ROOT/%{datadir}/doc/%name-documentation-%version/html
+cp -rp docs/latex/* $RPM_BUILD_ROOT/%{datadir}/doc/%{name}-documentation-%{version}/html
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -116,5 +116,5 @@ rm -rf $RPM_BUILD_ROOT
 %files documentation
 %defattr(644,root,root,755)
 #%doc docs/html/* docs/latex/*.tex docs/latex/*.sty
-%attr(644,root,root) /%{datadir}/doc/%name-documentation-%version/latex
-%attr(644,root,root) /%{datadir}/doc/%name-documentation-%version/html
+%attr(644,root,root) /%{datadir}/doc/%{name}-documentation-%{version}/latex
+%attr(644,root,root) /%{datadir}/doc/%{name}-documentation-%{version}/html
