@@ -65,7 +65,7 @@ Bibliotek obs³uguje g³ównie nastêpuj±ce funkcje:
 Summary:	DIME - development files
 Summary(pl):	DIME - czê¶æ dla programistów
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Dime development files.
