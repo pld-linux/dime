@@ -1,0 +1,2 @@
+- fixed broken %doc (doc were gzipped, not bzipped)
+- release 3
