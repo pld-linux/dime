@@ -1,5 +1,5 @@
 Summary:	DIME - DXF Import, manipulation and Export library
-Summary(pl):	DIME - biblioteka do manipulacji plikami w formacie DXF
+Summary(pl.UTF-8):   DIME - biblioteka do manipulacji plikami w formacie DXF
 Name:		dime
 Version:	0.9.1
 Release:	3
@@ -42,46 +42,46 @@ The intended purpose of dime was on importing and exporting DXF files.
 For this kind of usage, special memory management techniques has been
 implemented, that can be used to boost the performance significantly.
 
-%description -l pl
-Dime jest bibliotek± klas C++ s³u¿±c± odczytywaniu, tworzeniu,
-modyfikacji i zachowywaniu danych w plikach DXF. Nazwa jest skrótem od
-pierwszych liter: s³ów DXF Import, Manipulation, and Export library.
+%description -l pl.UTF-8
+Dime jest bibliotekÄ… klas C++ sÅ‚uÅ¼Ä…cÄ… odczytywaniu, tworzeniu,
+modyfikacji i zachowywaniu danych w plikach DXF. Nazwa jest skrÃ³tem od
+pierwszych liter: sÅ‚Ã³w DXF Import, Manipulation, and Export library.
 Format pliku DXF pochodzi z AutoCAD-a, obecnie jest jednak bardzo
 popularny.
 
-Bibliotek obs³uguje g³ównie nastêpuj±ce funkcje:
-- ³adowanie plików DXF do hierarchii obiektu dime zawieraj±cej dane
+Bibliotek obsÅ‚uguje gÅ‚Ã³wnie nastÄ™pujÄ…ce funkcje:
+- Å‚adowanie plikÃ³w DXF do hierarchii obiektu dime zawierajÄ…cej dane
   DXF
-- budowanie hierarchii obiektów dime od zera
-- ekstrakcja danych geometrycznych z hierarchii obiektów dime
-- manipulacja hierarchi± obiektów dime
-- przegl±d hierarchii obiektów dime podczas wykonywania ró¿nych zadañ
-- zachowywanie obiektów hierarchii dime w postaci plików zgodnych z
-  formatem DXF Oryginalnym celem dime by³o importowanie i eksportowanie
-  plików DXF. Dlatego zaimplementowano specjalne techniki zarz±dzania
-  pamiêci±, dziêki którym mo¿na znacznie zwiêkszyæ wydajno¶æ.
+- budowanie hierarchii obiektÃ³w dime od zera
+- ekstrakcja danych geometrycznych z hierarchii obiektÃ³w dime
+- manipulacja hierarchiÄ… obiektÃ³w dime
+- przeglÄ…d hierarchii obiektÃ³w dime podczas wykonywania rÃ³Å¼nych zadaÅ„
+- zachowywanie obiektÃ³w hierarchii dime w postaci plikÃ³w zgodnych z
+  formatem DXF Oryginalnym celem dime byÅ‚o importowanie i eksportowanie
+  plikÃ³w DXF. Dlatego zaimplementowano specjalne techniki zarzÄ…dzania
+  pamiÄ™ciÄ…, dziÄ™ki ktÃ³rym moÅ¼na znacznie zwiÄ™kszyÄ‡ wydajnoÅ›Ä‡.
 
 %package devel
 Summary:	DIME - development files
-Summary(pl):	DIME - czê¶æ dla programistów
+Summary(pl.UTF-8):   DIME - czÄ™Å›Ä‡ dla programistÃ³w
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Dime development files.
 
-%description devel -l pl
-Pliki dime przeznaczone dla programistów.
+%description devel -l pl.UTF-8
+Pliki dime przeznaczone dla programistÃ³w.
 
 %package documentation
 Summary:	DIME doc
-Summary(pl):	DIME - dokumentacja
+Summary(pl.UTF-8):   DIME - dokumentacja
 Group:		Documentation
 
 %description documentation
 Dime documentation.
 
-%description documentation -l pl
+%description documentation -l pl.UTF-8
 Dokumentacja dime.
 
 %prep
