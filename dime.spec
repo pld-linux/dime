@@ -1,5 +1,5 @@
 Summary:	DIME - DXF Import, manipulation and Export library
-Summary(pl.UTF-8):   DIME - biblioteka do manipulacji plikami w formacie DXF
+Summary(pl.UTF-8):	DIME - biblioteka do manipulacji plikami w formacie DXF
 Name:		dime
 Version:	0.9.1
 Release:	3
@@ -63,7 +63,7 @@ Bibliotek obsługuje głównie następujące funkcje:
 
 %package devel
 Summary:	DIME - development files
-Summary(pl.UTF-8):   DIME - część dla programistów
+Summary(pl.UTF-8):	DIME - część dla programistów
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -75,7 +75,7 @@ Pliki dime przeznaczone dla programistów.
 
 %package documentation
 Summary:	DIME doc
-Summary(pl.UTF-8):   DIME - dokumentacja
+Summary(pl.UTF-8):	DIME - dokumentacja
 Group:		Documentation
 
 %description documentation
