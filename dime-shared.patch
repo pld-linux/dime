@@ -1,0 +1,42 @@
+--- dime-0.9.1/build/makefile.orig	1999-02-17 16:05:33.000000000 +0100
++++ dime-0.9.1/build/makefile	2011-11-15 20:57:49.877780630 +0100
+@@ -8,7 +8,7 @@
+ #****************************************************************
+ 
+           CC = g++
+-          LD = ar cqs
++          LD = $(CC)
+ 
+      INCLUDE = -I../include
+          OPT = -O2
+@@ -17,7 +17,9 @@
+         WARN =
+       CFLAGS = $(OPT) $(DEBUG) $(DEFINES) $(WARN) $(INCLUDE) -c
+ 
+-     COMPILE = $(CC) $(CFLAGS) $^ -o $@
++     COMPILE = libtool --mode=compile --tag=CXX $(CC) $(CFLAGS) $^ -o $(@:.o=.lo)
++      LIBDIR = /usr/lib
++        LINK = libtool --mode=link --tag=CXX $(LD) $(LDFLAGS) -rpath $(LIBDIR) -o
+ 
+      TARGETS = libdime.a
+ 
+@@ -79,6 +81,8 @@
+   objs/UCSTable.o \
+   objs/LayerTable.o
+ 
++LTOBJECTS=$(OBJECTS:%.o=%.lo)
++
+ #***************************************************************************
+ 
+ all:: $(TARGETS)
+@@ -89,8 +93,8 @@
+ objs:
+ 	@mkdir $@
+ 
+-libdime.a: objs $(OBJECTS)
+-	$(LD) $@ $(OBJECTS)
++libdime.la: objs $(OBJECTS)
++	$(LINK) $@ $(LTOBJECTS)
+ 
+ #***************************************************************************
+ 

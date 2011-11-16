@@ -2,16 +2,21 @@ Summary:	DIME - DXF Import, manipulation and Export library
 Summary(pl.UTF-8):	DIME - biblioteka do manipulacji plikami w formacie DXF
 Name:		dime
 Version:	0.9.1
-Release:	3
-License:	GPL
+Release:	4
+License:	GPL v2
 Group:		Libraries
-# Old site:	ftp://ftp.sim.no/pub/dime/
-# New site(?):	http://download.berlios.de/cad2octree/
+# original source (no lonver available): ftp://ftp.sim.no/pub/dime/
+# new snapshot: ftp://ftp.sim.no/pub/snapshots/dime-latest.tar.gz
 Source0:	%{name}-%{version}-src.tar.bz2
 # Source0-md5:	142af240cd35508d606917a38164c759
 Source1:	%{name}-%{version}-doc.tar.bz2
 # Source1-md5:	994706320ce7d222a1597913ba0cbee0
-BuildRequires:	gcc-c++
+Patch0:		%{name}-c++.patch
+Patch1:		%{name}-shared.patch
+Patch2:		%{name}-doc.patch
+URL:		http://www.coin3d.org/lib/dime
+BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
 BuildRequires:	tetex-dvips
 BuildRequires:	tetex-fonts-ams
 BuildRequires:	tetex-format-latex
@@ -57,41 +62,59 @@ Bibliotek obsługuje głównie następujące funkcje:
 - manipulacja hierarchią obiektów dime
 - przegląd hierarchii obiektów dime podczas wykonywania różnych zadań
 - zachowywanie obiektów hierarchii dime w postaci plików zgodnych z
-  formatem DXF Oryginalnym celem dime było importowanie i eksportowanie
-  plików DXF. Dlatego zaimplementowano specjalne techniki zarządzania
-  pamięcią, dzięki którym można znacznie zwiększyć wydajność.
+  formatem DXF
+
+Pierwotnym celem dime było importowanie i eksportowanie plików DXF.
+Dlatego zaimplementowano specjalne techniki zarządzania pamięcią,
+dzięki którym można znacznie zwiększyć wydajność.
 
 %package devel
-Summary:	DIME - development files
-Summary(pl.UTF-8):	DIME - część dla programistów
+Summary:	Header files for DIME
+Summary(pl.UTF-8):	Pliki nagłówkowe DIME
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-Dime development files.
+Header files for DIME.
 
 %description devel -l pl.UTF-8
-Pliki dime przeznaczone dla programistów.
+Pliki nagłówkowe DIME.
+
+%package static
+Summary:	Static DIME library
+Summary(pl.UTF-8):	Statyczna biblioteka DIME
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Static DIME library.
+
+%description static -l pl.UTF-8
+Statyczna biblioteka DIME.
 
 %package documentation
-Summary:	DIME doc
+Summary:	DIME documentation
 Summary(pl.UTF-8):	DIME - dokumentacja
 Group:		Documentation
 
 %description documentation
-Dime documentation.
+DIME documentation.
 
 %description documentation -l pl.UTF-8
-Dokumentacja dime.
+Dokumentacja do DIME.
 
 %prep
-%setup -q
-%setup -q -D -b1
+%setup -q -b1
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
-%{__make} -C build \
+%{__make} -C build libdime.la \
 	CC="%{__cxx}" \
-	OPT="%{rpmcflags}"
+	OPT="%{rpmcxxflags} %{rpmcppflags}" \
+	LDFLAGS="%{rpmldflags}" \
+	LIBDIR=%{_libdir}
 
 %{__make} -C docs/latex refman.ps
 
@@ -100,29 +123,35 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}} \
 	$RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/{latex,html}
 
-cp -rp include/* $RPM_BUILD_ROOT%{_includedir}
-install build/libdime.a $RPM_BUILD_ROOT%{_libdir}
-cp -rp docs/latex/*.tex $RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/latex
-cp -rp docs/latex/*.sty $RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/latex
+cp -pr include/* $RPM_BUILD_ROOT%{_includedir}
+libtool --mode=install install build/libdime.la $RPM_BUILD_ROOT%{_libdir}
 
-cp -rp docs/latex/* $RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/html
+cp -pr docs/latex/*.tex $RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/latex
+cp -pr docs/latex/*.sty $RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/latex
+cp -pr docs/html/* $RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/html
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README TODO ChangeLog
-%{_libdir}/libdime.a
+%doc ChangeLog README TODO
+%attr(755,root,root) %{_libdir}/libdime.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libdime.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%doc docs/latex/refman.ps ChangeLog README TODO
+%doc docs/latex/refman.ps
+%attr(755,root,root) %{_libdir}/libdime.so
+%{_libdir}/libdime.la
 %{_includedir}/dime
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libdime.a
 
 %files documentation
 %defattr(644,root,root,755)
-#%doc docs/html/* docs/latex/*.tex docs/latex/*.sty
 %dir %{_docdir}/%{name}-documentation-%{version}
 %{_docdir}/%{name}-documentation-%{version}/latex
 %{_docdir}/%{name}-documentation-%{version}/html

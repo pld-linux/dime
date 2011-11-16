@@ -1,0 +1,64 @@
+--- dime-0.9.1/include/dime/classes/Class.h.orig	1999-02-25 17:13:24.000000000 +0100
++++ dime-0.9.1/include/dime/classes/Class.h	2011-11-15 20:51:01.204433613 +0100
+@@ -44,6 +44,7 @@
+ class dimeInput;
+ class dimeMemHandler;
+ class dimeOutput;
++class dimeModel;
+ 
+ class dimeClass : public dimeRecordHolder
+ {
+--- dime-0.9.1/include/dime/entities/Entity.h.orig	1999-02-25 17:13:24.000000000 +0100
++++ dime-0.9.1/include/dime/entities/Entity.h	2011-11-15 20:52:01.871102310 +0100
+@@ -42,6 +42,7 @@
+ #include <dime/RecordHolder.h>
+ 
+ class dimeLayer;
++class dimeModel;
+ 
+ class dimeEntity : public dimeRecordHolder
+ {
+--- dime-0.9.1/include/dime/entities/Vertex.h.orig	1999-02-25 17:13:24.000000000 +0100
++++ dime-0.9.1/include/dime/entities/Vertex.h	2011-11-15 20:52:28.654436541 +0100
+@@ -39,6 +39,8 @@
+ #include <dime/entities/Entity.h>
+ #include <dime/util/Linear.h>
+ 
++class dimePolyline;
++
+ class dimeVertex : public dimeEntity
+ {
+   friend class dimePolyline;
+--- dime-0.9.1/include/dime/entities/Insert.h.orig	1999-02-25 17:13:24.000000000 +0100
++++ dime-0.9.1/include/dime/entities/Insert.h	2011-11-15 20:53:17.721104851 +0100
+@@ -39,6 +39,8 @@
+ #include <dime/entities/Entity.h>
+ #include <dime/util/Linear.h>
+ 
++class dimeBlock;
++
+ class dimeInsert : public dimeEntity
+ {
+   friend class dimeEntitiesSection;
+--- dime-0.9.1/include/dime/objects/Object.h.orig	1999-02-25 17:13:24.000000000 +0100
++++ dime-0.9.1/include/dime/objects/Object.h	2011-11-15 20:51:25.181101082 +0100
+@@ -41,6 +41,8 @@
+ #include <dime/util/Linear.h>
+ #include <dime/RecordHolder.h>
+ 
++class dimeModel;
++
+ class dimeObject : public dimeRecordHolder
+ {
+   friend class dimeObjectesSection;
+--- dime-0.9.1/include/dime/Output.h.orig	1999-02-25 17:13:23.000000000 +0100
++++ dime-0.9.1/include/dime/Output.h	2011-11-15 20:49:54.631098052 +0100
+@@ -38,6 +38,8 @@
+ #include <dime/Basic.h>
+ #include <stdio.h>
+ 
++class dimeModel;
++
+ class dimeOutput
+ {
+ public:
