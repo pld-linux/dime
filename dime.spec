@@ -2,11 +2,11 @@ Summary:	DIME - DXF Import, manipulation and Export library
 Summary(pl.UTF-8):	DIME - biblioteka do manipulacji plikami w formacie DXF
 Name:		dime
 Version:	0.9.1
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		Libraries
 # original source (no lonver available): ftp://ftp.sim.no/pub/dime/
-# new snapshot: ftp://ftp.sim.no/pub/snapshots/dime-latest.tar.gz
+# now available at https://github.com/coin3d/dime, last tagged version is 0.9.1
 Source0:	%{name}-%{version}-src.tar.bz2
 # Source0-md5:	142af240cd35508d606917a38164c759
 Source1:	%{name}-%{version}-doc.tar.bz2
@@ -14,15 +14,10 @@ Source1:	%{name}-%{version}-doc.tar.bz2
 Patch0:		%{name}-c++.patch
 Patch1:		%{name}-shared.patch
 Patch2:		%{name}-doc.patch
-URL:		http://www.coin3d.org/lib/dime
+URL:		https://github.com/coin3d/dime
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
-BuildRequires:	tetex-dvips
-BuildRequires:	tetex-fonts-ams
-BuildRequires:	tetex-format-latex
-BuildRequires:	tetex-makeindex
-BuildRequires:	tetex-metafont
-BuildRequires:	tetex-tex-misc
+BuildRequires:	libtool >= 2:1.5
+BuildRequires:	rpm-build >= 4.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -92,16 +87,18 @@ Static DIME library.
 %description static -l pl.UTF-8
 Statyczna biblioteka DIME.
 
-%package documentation
-Summary:	DIME documentation
-Summary(pl.UTF-8):	DIME - dokumentacja
+%package apidocs
+Summary:	API documentation for DIME library
+Summary(pl.UTF-8):	Dokumentacja API biblioteki DIME
 Group:		Documentation
+Obsoletes:	dime-documentation < 0.9.1-5
+BuildArch:	noarch
 
-%description documentation
-DIME documentation.
+%description apidocs
+API documentation for DIME library.
 
-%description documentation -l pl.UTF-8
-Dokumentacja do DIME.
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki DIME.
 
 %prep
 %setup -q -b1
@@ -116,19 +113,12 @@ Dokumentacja do DIME.
 	LDFLAGS="%{rpmldflags}" \
 	LIBDIR=%{_libdir}
 
-%{__make} -C docs/latex refman.ps
-
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}} \
-	$RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/{latex,html}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}}
 
 cp -pr include/* $RPM_BUILD_ROOT%{_includedir}
 libtool --mode=install install build/libdime.la $RPM_BUILD_ROOT%{_libdir}
-
-cp -pr docs/latex/*.tex $RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/latex
-cp -pr docs/latex/*.sty $RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/latex
-cp -pr docs/html/* $RPM_BUILD_ROOT%{_docdir}/%{name}-documentation-%{version}/html
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -141,7 +131,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc docs/latex/refman.ps
 %attr(755,root,root) %{_libdir}/libdime.so
 %{_libdir}/libdime.la
 %{_includedir}/dime
@@ -150,8 +139,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libdime.a
 
-%files documentation
+%files apidocs
 %defattr(644,root,root,755)
-%dir %{_docdir}/%{name}-documentation-%{version}
-%{_docdir}/%{name}-documentation-%{version}/latex
-%{_docdir}/%{name}-documentation-%{version}/html
+%doc docs/html/*
