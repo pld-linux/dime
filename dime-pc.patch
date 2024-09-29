@@ -1,0 +1,16 @@
+--- dime/dime.pc.in.orig	2019-12-26 00:35:11.000000000 +0100
++++ dime/dime.pc.in	2024-09-29 16:43:39.625169350 +0200
+@@ -10,11 +10,8 @@ Description: library for reading, constr
+ Version: @VERSION@
+ Requires:
+ Conflicts:
+-Libs: -L${libdir} @DIME_EXTRA_LDFLAGS@ @DIME_EXTRA_LIBS@
+-Cflags: -I${includedir} @DIME_EXTRA_CFLAGS@ @DIME_EXTRA_CPPFLAGS@
++Libs: -L${libdir} @DIME_EXTRA_LIBS@
++Cflags: -I${includedir}
+ 
+ dime_host="@host@"
+ compiler=@DIME_COMPILER@
+-compiler_is_gcc=@ac_compiler_gnu@
+-frameworkdir=@frameworkdir@
+-msvcrt=@DIME_MSVC_LIBC@

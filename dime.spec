@@ -1,20 +1,21 @@
+#
+# Conditional build:
+%bcond_without	apidocs		# HTML documentation
+%bcond_without	static_libs	# static library
+
 Summary:	DIME - DXF Import, manipulation and Export library
 Summary(pl.UTF-8):	DIME - biblioteka do manipulacji plikami w formacie DXF
 Name:		dime
 Version:	0.9.1
-Release:	5
-License:	GPL v2
+Release:	6
+License:	BSD
 Group:		Libraries
-# original source (no lonver available): ftp://ftp.sim.no/pub/dime/
-# now available at https://github.com/coin3d/dime, last tagged version is 0.9.1
-Source0:	%{name}-%{version}-src.tar.bz2
-# Source0-md5:	142af240cd35508d606917a38164c759
-Source1:	%{name}-%{version}-doc.tar.bz2
-# Source1-md5:	994706320ce7d222a1597913ba0cbee0
-Patch0:		%{name}-c++.patch
-Patch1:		%{name}-shared.patch
-Patch2:		%{name}-doc.patch
+#Source0Download: https://github.com/coin3d/dime/releases
+Source0:	https://github.com/coin3d/dime/releases/download/dime-%{version}/%{name}-%{version}-src.tar.gz
+# Source0-md5:	90ead20f77a8c1caf6a8c98cc21c61c6
+Patch0:		%{name}-pc.patch
 URL:		https://github.com/coin3d/dime
+%{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	rpm-build >= 4.6
@@ -68,6 +69,7 @@ Summary:	Header files for DIME
 Summary(pl.UTF-8):	Pliki nagłówkowe DIME
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	libstdc++-devel
 
 %description devel
 Header files for DIME.
@@ -101,44 +103,51 @@ API documentation for DIME library.
 Dokumentacja API biblioteki DIME.
 
 %prep
-%setup -q -b1
+%setup -q -n %{name}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
+
+# no +x in tarball
+chmod 755 configure cfg/doxy4win.pl
 
 %build
-%{__make} -C build libdime.la \
-	CC="%{__cxx}" \
-	OPT="%{rpmcxxflags} %{rpmcppflags}" \
-	LDFLAGS="%{rpmldflags}" \
-	LIBDIR=%{_libdir}
+%configure \
+	--enable-html \
+	%{?with_static_libs:--enable-static}
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}}
 
-cp -pr include/* $RPM_BUILD_ROOT%{_includedir}
-libtool --mode=install install build/libdime.la $RPM_BUILD_ROOT%{_libdir}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libdime.la
+# packaged as %doc
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/dime
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README TODO
+%doc AUTHORS COPYING FAQ README TODO
 %attr(755,root,root) %{_libdir}/libdime.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libdime.so.0
+%attr(755,root,root) %ghost %{_libdir}/libdime.so.1
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libdime.so
-%{_libdir}/libdime.la
 %{_includedir}/dime
+%{_pkgconfigdir}/dime.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libdime.a
 
+%if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
-%doc docs/html/*
+%doc html/*.{css,html,js,png}
+%endif
