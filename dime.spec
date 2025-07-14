@@ -104,7 +104,7 @@ Dokumentacja API biblioteki DIME.
 
 %prep
 %setup -q -n %{name}
-%patch0 -p1
+%patch -P0 -p1
 
 # no +x in tarball
 chmod 755 configure cfg/doxy4win.pl
